@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { Loader, PageLayout } from "./components";
 
-const AuthRoute = ({ children }) => {
+const AuthRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
 
   if (loading) {

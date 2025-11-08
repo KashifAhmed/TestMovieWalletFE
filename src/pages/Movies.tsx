@@ -7,13 +7,7 @@ import { toast } from "react-toastify";
 import { Loader, PageLayout } from "../components";
 import { ConfirmModal } from "../components/ui/Modal";
 import { MovieService } from "../features/movies";
-
-interface Movie {
-  id: number;
-  title: string;
-  year: string;
-  imageUrl: string;
-}
+import type { Movie } from "../types/global";
 
 const Movies: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +15,7 @@ const Movies: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [movieToDelete, setMovieToDelete] = useState<number | null>(null);
+  const [movieToDelete, setMovieToDelete] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const { signOut } = useAuth();
@@ -54,11 +48,11 @@ const Movies: React.FC = () => {
     toast.success("Logged out successfully");
   };
 
-  const handleEditMovie = (id: number) => {
+  const handleEditMovie = (id: string) => {
     navigate(`/movie-manager/${id}`);
   };
 
-  const handleDeleteMovie = (id: number) => {
+  const handleDeleteMovie = (id: string) => {
     setMovieToDelete(id);
     setShowDeleteModal(true);
   };
@@ -195,8 +189,8 @@ const Movies: React.FC = () => {
                   key={movie.id}
                   id={movie.id}
                   title={movie.title}
-                  year={movie.publishYear}
-                  imageUrl={movie.image}
+                  year={movie.publishYear || movie.year}
+                  imageUrl={movie.image || movie.imageUrl}
                   onEdit={handleEditMovie}
                   onDelete={handleDeleteMovie}
                 />
