@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Toastify__toast--success {
+  background-color: #4ADE80 !important; 
+}
+
+.Toastify__toast--error {
+  background-color: #F87171 !important; 
+}
+
+.Toastify__toast {
+  border-radius: 10px !important;
+  font-weight: 500;
+  color: white !important;
+}
+

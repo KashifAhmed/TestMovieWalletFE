@@ -1,0 +1,96 @@
+.react-datepicker {
+  background-color: #234150 !important;
+  border: 1px solid #2D5563 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.react-datepicker__header {
+  background-color: #234150 !important;
+  border-bottom: 1px solid #2D5563 !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.react-datepicker__current-month {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.react-datepicker__navigation {
+  top: 12px !important;
+}
+
+.react-datepicker__navigation--previous {
+  border-right-color: #9CA3AF !important;
+  left: 12px !important;
+}
+
+.react-datepicker__navigation--next {
+  border-left-color: #9CA3AF !important;
+  right: 12px !important;
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: #4ADE80 !important;
+}
+
+.react-datepicker__year-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  max-width: 240px !important;
+  padding: 12px !important;
+}
+
+.react-datepicker__year-text {
+  display: inline-block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 8px !important;
+  text-align: center !important;
+  color: white !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.react-datepicker__year-text:hover {
+  background-color: #2D5563 !important;
+  border-color: #4ADE80 !important;
+}
+
+.react-datepicker__year-text--selected {
+  background-color: #4ADE80 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.react-datepicker__year-text--keyboard-selected {
+  background-color: #4ADE80 !important;
+  color: #ffffff !important;
+}
+
+.react-datepicker__year-text--today {
+  color: #4ADE80 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+}
+
+.react-datepicker__year-text--today.react-datepicker__year-text--selected {
+  color: #ffffff !important;
+  background-color: #4ADE80 !important;
+}
+
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+.react-datepicker-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
