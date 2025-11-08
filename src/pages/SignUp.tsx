@@ -38,9 +38,10 @@ const SignUp: React.FC = () => {
 
       toast.success("Account created! Check your email to confirm your address.");
       navigate("/signin");
-    } catch (error: any) {
-      console.error("Sign up error:", error.message);
-      toast.error(error.message);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "An error occurred during sign up";
+      console.error("Sign up error:", message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }

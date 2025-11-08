@@ -1,7 +1,6 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './YearDropdown.css';
 
 interface YearDropdownProps {
   value: string;
@@ -12,7 +11,7 @@ interface YearDropdownProps {
 const CustomInput = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement> & { value?: string }
->(({ children, onClick, className, value, ...rest }, ref) => (
+>(({ onClick, className, value, ...rest }, ref) => (
   <button
     ref={ref}
     type="button"
@@ -21,9 +20,8 @@ const CustomInput = React.forwardRef<
     {...rest}
   >
     <span
-      className={`whitespace-nowrap overflow-hidden text-ellipsis ${
-        value ? 'text-white' : 'text-gray-400'
-      }`}
+      className={`whitespace-nowrap overflow-hidden text-ellipsis ${value ? 'text-white' : 'text-gray-400'
+        }`}
     >
       {value || 'Publishing year'}
     </span>
@@ -69,7 +67,6 @@ const YearDropdown: React.FC<YearDropdownProps> = ({
         customInput={<CustomInput value={value} />}
         popperPlacement="bottom-start"
         portalId="root"
-        
       />
     </div>
   );

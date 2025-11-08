@@ -47,8 +47,8 @@ const MovieManager: React.FC = () => {
           console.log('Loaded movie data:', movie);
           if (movie) {
             setValue('title', movie.title || '');
-            setValue('publishingYear', movie.year || (movie as any).publishYear || '');
-            setImagePreview(movie.imageUrl || (movie as any).image || '');
+            setValue('publishingYear', movie.year || movie.publishYear || '');
+            setImagePreview(movie.imageUrl || movie.image || '');
           }
         } catch (error) {
           console.error('Error loading movie:', error);

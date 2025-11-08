@@ -39,9 +39,10 @@ const SignIn: React.FC = () => {
 
       toast.success("Login successful!");
       navigate("/movies");
-    } catch (error: any) {
-      console.error("Login error:", error.message);
-      toast.error(error.message);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "An error occurred during login";
+      console.error("Login error:", message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
