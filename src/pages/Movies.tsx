@@ -17,25 +17,23 @@ interface Movie {
 
 const Movies: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [movieToDelete, setMovieToDelete] = useState<number | null>(null);
 
   const navigate = useNavigate();
   const { signOut } = useAuth();
-  const itemsPerPage = 8; 
-
-  const totalPages = Math.ceil(movies.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentMovies = movies.slice(startIndex, startIndex + itemsPerPage);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
-        const movies = await MovieService.getMovies();
-        setMovies(movies);
+        const response = await MovieService.getMovies(currentPage, itemsPerPage);
+        setMovies(response.data || []);
+        setTotalPages(response.meta.totalPages || 1);
       } catch (error) {
         console.error("Error fetching movies:", error);
         toast.error("Failed to load movies");
@@ -45,7 +43,7 @@ const Movies: React.FC = () => {
     };
 
     fetchMovies();
-  }, []);
+  }, [currentPage]);
 
   const handleAddMovie = () => {
     navigate('/movie-manager');
@@ -71,11 +69,16 @@ const Movies: React.FC = () => {
     try {
       const success = await MovieService.deleteMovie(movieToDelete);
       if (success) {
-        setMovies((prev) => prev.filter((movie) => movie.id !== movieToDelete));
         toast.success("Movie deleted successfully");
-        
-        if (currentMovies.length === 1 && currentPage > 1) {
+
+        // If we deleted the last item on the current page and we're not on page 1, go back a page
+        if (movies.length === 1 && currentPage > 1) {
           setCurrentPage(currentPage - 1);
+        } else {
+          // Otherwise, refetch the current page
+          const response = await MovieService.getMovies(currentPage, itemsPerPage);
+          setMovies(response.data || []);
+          setTotalPages(response.meta.totalPages || 1);
         }
       } else {
         toast.error("Failed to delete movie");
@@ -187,7 +190,7 @@ const Movies: React.FC = () => {
 
             {/* Movie Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-              {currentMovies.map((movie) => (
+              {movies.map((movie) => (
                 <MovieCard
                   key={movie.id}
                   id={movie.id}
@@ -199,7 +202,7 @@ const Movies: React.FC = () => {
                 />
               ))}
             </div>
-
+            
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-4 mb-20">

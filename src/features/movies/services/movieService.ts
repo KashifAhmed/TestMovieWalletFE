@@ -6,7 +6,7 @@ import { getAuthHeaders, handleApiError } from "../../../lib/api.utils";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export class MovieService {
-  static async getMovies(): Promise<MoviesResponse> {
+  static async getMovies(page: number = 1, limit: number = 10): Promise<MoviesResponse> {
     try {
       const headers = await getAuthHeaders('json');
 
@@ -14,7 +14,11 @@ export class MovieService {
         `${BASE_URL}/movies`,
         {
           headers,
-          timeout: 10000, 
+          params: {
+            page,
+            limit,
+          },
+          timeout: 10000,
         }
       );
 

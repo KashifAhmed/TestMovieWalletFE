@@ -1,6 +1,7 @@
 import axios from "axios";
 import { supabase } from "../supabaseClient";
 
+
 export const getAuthHeaders = async (contentType: 'json' | 'form-data' = 'json'): Promise<Record<string, string>> => {
   const { data: { session } } = await supabase.auth.getSession();
   
