@@ -1,12 +1,12 @@
 import React from 'react';
 
 interface MovieCardProps {
-  id: number;
+  id: string;
   title: string;
   year: string;
   imageUrl: string;
-  onEdit?: (id: number) => void;
-  onDelete?: (id: number) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({

@@ -94,7 +94,7 @@ export class MovieService {
     }
   }
 
-  static async deleteMovie(id: number): Promise<boolean> {
+  static async deleteMovie(id: string): Promise<boolean> {
     try {
       const headers = await getAuthHeaders('json');
 
